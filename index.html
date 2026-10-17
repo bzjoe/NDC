@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Normal Depth Calculator — V1.3 Compound Channel</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">≋</div>
+    <div><h1>Normal Depth Calculator - EDUCATION ONLY</h1><p>Compound Channel Analysis — HEC-RAS 1D Subdivided Method</p></div>
+  </div>
+  <div class="status"><span>▣</span> Local / Self-Contained</div>
+</header>
+
+<main class="app-shell">
+  <aside class="sidebar">
+    <section class="card input-card">
+      <h2><span>☷</span> Hydraulic Inputs</h2>
+      <label>Solve For
+        <select id="solvetype">
+          <option value="s">Slope</option>
+          <option value="wse" selected>Water Surface Elevation (Normal Depth)</option>
+          <option value="n">Main Channel n value</option>
+          <option value="q">Discharge</option>
+        </select>
+      </label>
+      <div class="two-col">
+        <label>Slope (S)<input id="slope" value="0.002"></label>
+        <label>Discharge Q (cfs)<input id="q" value="20000"></label>
+      </div>
+      <div class="two-col">
+        <label>Main Channel n (n_ch)<input id="n_ch" value="0.030"></label>
+        <label>WSE (ft)<input id="wse" value="8"></label>
+      </div>
+      <div class="two-col">
+        <label>Left OB n (n_lob)<input id="n_lob" value="0.045"></label>
+        <label>Right OB n (n_rob)<input id="n_rob" value="0.045"></label>
+      </div>
+      <div class="two-col">
+        <label>Left Bank Sta<input id="leftBank" value="187.4"></label>
+        <label>Right Bank Sta<input id="rightBank" value="370.6"></label>
+      </div>
+      <div class="button-row">
+        <button id="calculate" class="primary">▣ Calculate</button>
+        <button id="reset" class="secondary">↶ Reset Points</button>
+      </div>
+    </section>
+
+    <section class="card data-card">
+      <h2><span>▦</span> Cross-Section Data</h2>
+      <p>Paste station and elevation pairs separated by spaces, tabs, or commas.</p>
+      <textarea id="xsInput" spellcheck="false"></textarea>
+      <div class="button-row">
+        <label class="file-button">⇩ Load CSV<input id="fileInput" type="file" accept=".csv,.txt,.dat"></label>
+        <button id="applyData" class="secondary">✓ Apply Data</button>
+      </div>
+    </section>
+  </aside>
+
+  <section class="workspace">
+    <section class="card plot-card">
+      <div class="section-title"><h2>▰ Cross-Section Profile</h2><div class="legend"><span><i class="ground-key"></i> Ground Line</span><span><i class="water-key"></i> Water Surface</span></div></div>
+      <div class="plot-frame"><svg id="plot" viewBox="0 0 900 430" preserveAspectRatio="none" aria-label="Cross-section profile"></svg></div>
+    </section>
+
+    <section class="card results-card">
+      <h2>▣ Calculation Results</h2>
+      <div class="result-grid">
+        <div class="result highlight"><span>WATER SURFACE ELEV.</span><strong id="wseR">—</strong><small>ft</small></div>
+        <div class="result highlight"><span>NORMAL DEPTH</span><strong id="depth">—</strong><small>ft</small></div>
+        <div class="result"><span>AVERAGE VELOCITY</span><strong id="avgVel">—</strong><small>ft/s</small></div>
+        <div class="result"><span>FROUDE NUMBER</span><strong id="froude">—</strong><small>—</small></div>
+        <div class="result"><span>FLOW AREA</span><strong id="area">—</strong><small>sq ft</small></div>
+        <div class="result"><span>TOP WIDTH</span><strong id="topWidth">—</strong><small>ft</small></div>
+        <div class="result"><span>WETTED PERIMETER</span><strong id="wetP">—</strong><small>ft</small></div>
+        <div class="result"><span>HYDRAULIC RADIUS</span><strong id="hydRadius">—</strong><small>ft</small></div>
+        <div class="result"><span>CALCULATED Q</span><strong id="calcQ">—</strong><small>cfs</small></div>
+        <div class="result"><span>ITERATIONS</span><strong id="iterations">—</strong><small>loops</small></div>
+      </div>
+    </section>
+  </section>
+</main>
+
+<script src="js/hydraulics.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
